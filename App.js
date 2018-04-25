@@ -8,12 +8,23 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 
-import Login from './sources-dev/components/login' //Import the component file
+import Season from './sources-dev/components/Season' //Import the component file
 import rootReducer from './sources-dev/reducers/index'; //Import the reducer
+
+import { YellowBox } from 'react-native';
+
+YellowBox.ignoreWarnings([
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+  'Warning: componentWillUpdate is deprecated',
+  'Module RCTImageLoader requires',
+  'Remote debugger is in a background tab',
+]);
 
 const persistConfig = {
   key: 'root',
   storage,
+  //TODO: Blacklister le state du serie pour ne pas l'avoir à enregistrer dans redux-persist
 }
 
 let persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -26,7 +37,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Login />
+          <Season />
         </PersistGate>
       </Provider>
     );

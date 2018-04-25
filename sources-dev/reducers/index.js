@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import { /* DATA_AVAILABLE, */ IS_ADDED } from "../actions/" //Import the actions types constant we defined in our actions
+import { SEASON_LOADED, IS_ADDED, SEASON_LOADING } from "../actions/" //Import the actions types constant we defined in our actions
 
-//let dataState = { data: [], loading: true };
+let seriesState = { series: [], loading: false };
 
 let dataState = { data: null, loading: false, error: null}
 
@@ -26,12 +26,25 @@ const data = (state = dataState, action) => {
     }
 };
 
+const series = (state = seriesState, action) => {
+    switch (action.type) {
+        case SEASON_LOADING:
+            state = { ...state, loading: true };
+            return state
+        case SEASON_LOADED:
+            state = { series: action.series, loading: false };
+            return state
+        default:
+            return state;
+    }
+};
+
 
 // Combine all the reducers
 const rootReducer = combineReducers({
     //dataReducer,
-    data
-    // ,[ANOTHER REDUCER], [ANOTHER REDUCER] ....
+    data,
+    series
 })
 
 export default rootReducer;

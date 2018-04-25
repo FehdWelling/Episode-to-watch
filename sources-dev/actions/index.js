@@ -1,5 +1,10 @@
+import request from 'superagent';
+
 //export const DATA_AVAILABLE = 'DATA_AVAILABLE';
 export const IS_ADDED = 'IS_ADDED';
+
+export const SEASON_LOADING = 'SEASON_LOADING';
+export const SEASON_LOADED = 'SEASON_LOADED';
 
 //Import the sample data
 //import Data from '../instructions.json';
@@ -24,3 +29,20 @@ export function addSerie(value) {
         dispatch({ type: IS_ADDED, data: value });
     };
 } 
+
+
+export function fetchSeries(serieName) {
+    return (dispatch, getState) => {
+        dispatch({ type: SEASON_LOADING });
+        request
+            .get(`https://api.themoviedb.org/3/search/tv?api_key=f3f02998bdb1457a83e40072e6d2209a&language=fr-FR&query=${serieName}`)
+            .then(
+                (response) => {
+                    dispatch({
+                        type: SEASON_LOADED,
+                        series: response.body
+                    });
+                }
+            );
+    };
+}

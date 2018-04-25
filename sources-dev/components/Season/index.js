@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
     AppRegistry,
     StyleSheet,
@@ -8,53 +10,38 @@ import {
     View,
     AsyncStorage
 } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { addSerie } from '../../actions/index';
-import styles from './styles'
+import { fetchSeries } from '../../actions/index';
+import styles from './styles';
 
 
-class Login extends Component {
+class Season extends React.Component{
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state = { value : "turluberlu" }
-        this.see = this.see.bind(this)
+        this.state = { value: "" }
     }
-    
-    /* logged() {
-        this.props.login();
-        const isConnected = this.props.isLogged == true ? "Connecté" : "Deconnecté"
-        this.save(isConnected)
-    } */
+
     see(){
         {console.log(this.props)}
     }
-    /* async save(value){
-        try {
-            await AsyncStorage.setItem('@MySuperStore:key', value);
-        } catch(error) {
-            console.log(error)
-        }
-    } */
-    
+
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
-                    Welcome to Demo AsyncStorage!
+                    LES AMIIIIIIIIIIIIIIIIIIS!
                 </Text>
 
                 <TextInput
                     style={styles.formInput}
                     placeholder="Ajouter une nouvelle série"
                     value={this.state.value}
-                    onChangeText={(value) => this.setState({value})}
+                    onChangeText={(value) => this.setState({ value })}
                 />
 
                 <Button
                     style={styles.formButton}
-                    onPress={()=> this.props.addSerie(this.state.value)}
+                    onPress={() => this.props.fetchSeries(this.state.value)}
                     title="connexion"
                     color="#2196f3"
                     accessibilityLabel="connexion"
@@ -68,9 +55,9 @@ class Login extends Component {
                     accessibilityLabel="connexion"
                 />
 
-                <Text style={styles.instructions}>
-                    Stored key is =
-                </Text>
+                {this.props.series.series && !this.props.series.loading &&
+                    < Text > { this.props.series.series.results.map((serie) => serie.name)} </Text>
+                }
             </View>
         );
     }
@@ -78,14 +65,12 @@ class Login extends Component {
 
 function mapStateTopProps(state) {
     return {
-        data: state.data
+        series: state.series
     };
 }
 
 function mapDispatchTopProps(dispatch) {
-    return bindActionCreators({ addSerie }, dispatch);
+    return bindActionCreators({ fetchSeries }, dispatch);
 }
 
-export default connect(mapStateTopProps, mapDispatchTopProps)(Login);
-
-/* AppRegistry.registerComponent('AsyncStorageExample', () => AsyncStorageExample); */
+export default connect(mapStateTopProps, mapDispatchTopProps)(Season);
