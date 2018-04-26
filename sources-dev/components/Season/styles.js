@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        padding: 30,
         flex: 1,
-        alignItems: 'stretch',
+        paddingTop: 30,
+        padding: 10,
         backgroundColor: '#F5FCFF',
     },
     welcome: {
@@ -22,10 +22,16 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: "#555555",
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-        marginTop: 5,
+    serie: {
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 15,
+        borderColor: '#d6d7da',
+        borderWidth: 2,
+        borderRadius: 5
     },
+    serieName: {
+        fontWeight: 'bold',
+        fontSize: 15
+    }
 });

@@ -8,7 +8,8 @@ import {
     TextInput,
     Button,
     View,
-    AsyncStorage
+    FlatList,
+    Image
 } from 'react-native';
 import { fetchSeries } from '../../actions/index';
 import styles from './styles';
@@ -21,8 +22,16 @@ class Season extends React.Component{
         this.state = { value: "" }
     }
 
-    see(){
-        {console.log(this.props)}
+    renderSeries(item){
+        return (
+            <View style={styles.serie}>
+                <Image source={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + item.poster_path }}
+                    style={[{ width: 100, height: 193}, styles.img]} />
+                <Text style={styles.serieName}>{item.name}</Text>
+                <Text style={styles.serieName}>{item.first_air_date}</Text>
+                <Text style={styles.serieName}>{item.vote_average}</Text>
+            </View>
+        )
     }
 
     render() {
@@ -47,16 +56,12 @@ class Season extends React.Component{
                     accessibilityLabel="connexion"
                 />
 
-                <Button
-                    style={styles.formButton}
-                    onPress={() => this.see()}
-                    title="connexion"
-                    color="#2196f3"
-                    accessibilityLabel="connexion"
-                />
-
                 {this.props.series.series && !this.props.series.loading &&
-                    < Text > { this.props.series.series.results.map((serie) => serie.name)} </Text>
+                    <FlatList 
+                        data={this.props.series.series.results}
+                        renderItem={({ item }) => this.renderSeries(item)}
+                        keyExtractor={item => item.name}
+                    />
                 }
             </View>
         );

@@ -24,7 +24,7 @@ YellowBox.ignoreWarnings([
 const persistConfig = {
   key: 'root',
   storage,
-  //TODO: Blacklister le state du serie pour ne pas l'avoir à enregistrer dans redux-persist
+  whitelist: ['data']
 }
 
 let persistedReducer = persistReducer(persistConfig, rootReducer)
