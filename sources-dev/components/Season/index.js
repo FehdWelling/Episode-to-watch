@@ -9,10 +9,12 @@ import {
     Button,
     View,
     FlatList,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import { fetchSeries } from '../../actions/index';
 import styles from './styles';
+import { StackNavigator } from 'react-navigation';
 
 
 class Season extends React.Component{
@@ -24,13 +26,15 @@ class Season extends React.Component{
 
     renderSeries(item){
         return (
-            <View style={styles.serie}>
+            <TouchableOpacity style={styles.serie} onPress={() => this.props.navigation.navigate('Details', {
+                idSerie: item.id,
+            })}>
                 <Image source={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + item.poster_path }}
                     style={[{ width: 100, height: 193}, styles.img]} />
                 <Text style={styles.serieName}>{item.name}</Text>
                 <Text style={styles.serieName}>{item.first_air_date}</Text>
                 <Text style={styles.serieName}>{item.vote_average}</Text>
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -47,6 +51,7 @@ class Season extends React.Component{
                     value={this.state.value}
                     onChangeText={(value) => this.setState({ value })}
                 />
+                
 
                 <Button
                     style={styles.formButton}

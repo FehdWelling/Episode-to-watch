@@ -38,9 +38,9 @@ class AddSeason extends Component {
                 <Button
                     style={styles.formButton}
                     onPress={()=> this.props.addSerie(this.state.value)}
-                    title="connexion"
+                    title="Rechercher"
                     color="#2196f3"
-                    accessibilityLabel="connexion"
+                    accessibilityLabel="Rechercher"
                 />
 
                 <Text style={styles.instructions}>
