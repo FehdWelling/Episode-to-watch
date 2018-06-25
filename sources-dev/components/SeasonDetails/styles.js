@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
     bgSerie: {
-        position: absolute,
+        position: 'absolute',
         width: Dimensions.get('screen').width,
         height: 200,
         top: 0,
@@ -10,6 +10,6 @@ export default StyleSheet.create({
         right: 0
     },
     serie: {
-        position: relative
+        position: 'relative'
     }
 });

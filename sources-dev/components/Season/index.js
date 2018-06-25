@@ -15,6 +15,7 @@ import {
 import { fetchSeries } from '../../actions/index';
 import styles from './styles';
 import { StackNavigator } from 'react-navigation';
+import Header from '../Header/index';
 
 
 class Season extends React.Component{
@@ -23,6 +24,11 @@ class Season extends React.Component{
         super(props)
         this.state = { value: "" }
     }
+
+    static navigationOptions = {
+        headerTitle: <Header title="Accueil"/>,
+    };
+
 
     renderSeries(item){
         return (

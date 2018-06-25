@@ -28,7 +28,6 @@ export default StyleSheet.create({
         marginTop: 15,
         borderColor: '#d6d7da',
         borderWidth: 2,
-        borderRadius: 5
     },
     serieName: {
         fontWeight: 'bold',
