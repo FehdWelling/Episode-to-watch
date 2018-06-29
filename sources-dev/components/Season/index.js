@@ -16,6 +16,7 @@ import { fetchSeries } from '../../actions/index';
 import styles from './styles';
 import { StackNavigator } from 'react-navigation';
 import Header from '../Header/index';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 
 class Season extends React.Component{
@@ -31,15 +32,35 @@ class Season extends React.Component{
 
 
     renderSeries(item){
+        const voteAverage = item.vote_average * 10
+
         return (
             <TouchableOpacity style={styles.serie} onPress={() => this.props.navigation.navigate('Details', {
                 idSerie: item.id,
             })}>
                 <Image source={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + item.poster_path }}
-                    style={[{ width: 100, height: 193}, styles.img]} />
-                <Text style={styles.serieName}>{item.name}</Text>
-                <Text style={styles.serieName}>{item.first_air_date}</Text>
-                <Text style={styles.serieName}>{item.vote_average}</Text>
+                    style={[{ width: 97, height: 139}, styles.img]} />
+                <View style={styles.infoSerie}>
+                    <View style={styles.titleContainer}>
+                        <AnimatedCircularProgress
+                            size={30}
+                            width={3}
+                            fill={voteAverage}
+                            tintColor="#00e0ff"
+                            rotation={0} 
+                            //backgroundColor="#3d5875"
+                        >
+                            {
+                                (voteAverage) => (
+                                    <Text style={styles.voteAverage}>{Math.round(voteAverage)} %</Text>
+                                )
+                            }
+                        </AnimatedCircularProgress>
+                        <Text style={styles.serieName}>{item.name}</Text> 
+                    </View>
+                    <Text numberOfLines={4} style={styles.description}>{item.overview}</Text>
+                    <Text style={styles.airDate}>{item.first_air_date}</Text>
+                </View>
             </TouchableOpacity>
         )
     }
