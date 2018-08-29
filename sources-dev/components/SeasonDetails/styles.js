@@ -2,14 +2,10 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
     bgSerie: {
-        //position: 'absolute',
-        width: Dimensions.get('screen').width,
-        height: 300,
-        /* top: 0,
-        left: 0,
-        right: 0 */
+        width: "100%",
+        height: 200,
     },
     serie: {
-        position: 'relative'
+        flex: 1
     }
 });

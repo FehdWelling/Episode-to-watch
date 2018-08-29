@@ -17,12 +17,21 @@ import styles from './styles';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 
 class SeasonDetails extends React.Component {
-    
+
     componentWillMount(){
         const { params } = this.props.navigation.state;
         const idSerie = params ? params.idSerie : null;
         
         this.props.getSerieById(idSerie)
+    }
+
+    renderSeasons(season){
+        <TouchableOpacity key={key}>
+            <Text>{season.name}</Text>
+            <Image source={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + serie.poster_path }} />
+            <Text>{season.episode_count}</Text>
+            <Text>{season.air_date}</Text>
+        </TouchableOpacity>
     }
 
     render() {
