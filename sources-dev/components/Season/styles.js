@@ -37,6 +37,8 @@ export default StyleSheet.create({
         marginLeft: 10
     },
     serieName: {
+        flex: 1,
+        flexWrap: 'wrap',
         alignSelf: 'center',
         marginLeft: 10,
         fontWeight: 'bold',

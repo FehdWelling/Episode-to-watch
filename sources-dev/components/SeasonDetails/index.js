@@ -14,6 +14,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 import { getSerieById } from '../../actions/index';
 import styles from './styles';
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 
 class SeasonDetails extends React.Component {
     
@@ -27,12 +28,23 @@ class SeasonDetails extends React.Component {
     render() {
         const { serie } = this.props.serie
         return (
-            <View style={styles.serie}>
+            <HeaderImageScrollView
+            maxHeight={200}
+            minHeight={50}
+            headerImage={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + serie.backdrop_path }}
+            >
+                <View style={{ height: 1000 }}>
+                    <TriggeringView onHide={() => console.log('text hidden')} >
+                    <Text>Scroll Me!</Text>
+                    </TriggeringView>
+                </View>
+            </HeaderImageScrollView>
+            /* <View style={styles.serie}>
                 <Image source={{ uri: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2/' + serie.backdrop_path }} style={styles.bgSerie} />
                 <Text>
                     {this.props.serie.serie.name}
                 </Text>
-            </View>
+            </View> */
         );
     }
 }

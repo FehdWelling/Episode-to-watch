@@ -43,7 +43,7 @@ class Season extends React.Component{
                 <View style={styles.infoSerie}>
                     <View style={styles.titleContainer}>
                         <AnimatedCircularProgress
-                            size={30}
+                            size={35}
                             width={3}
                             fill={voteAverage}
                             tintColor="#00e0ff"
